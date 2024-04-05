@@ -20,16 +20,17 @@ public class MainGerenciamento {
 						GERENCIAMENTO DE TURMAS
 					---------------------------------------
 					1 - Cadastrar Aluno
-					2 - Média da Turma
-					3 - Situação Aluno
-					4 - Exibir Alunos
-					5 - Editar Aluno
-					6 - Mural de Aniversariantes
-					7 - Encerrar Programa
+					2 - Cadastrar Turma
+					3 - Média da Turma
+					4 - Situação Aluno
+					5 - Exibir Alunos
+					6 - Editar Aluno
+					7 - Mural de Aniversariantes
+					8 - Encerrar Programa
 					
 					Escolha uma opção: 
 					""";
-		while (opcao != 7) {
+		while (opcao != 8) {
 			
 			do {
 				System.out.println(menu);
@@ -37,10 +38,10 @@ public class MainGerenciamento {
 				opcao = s.nextInt();
 				s.nextLine();
 				
-				if(opcao < 1 || opcao > 7) {
+				if(opcao < 1 || opcao > 8) {
 					System.out.println("Opção inválida!");
 				}
-			}while(opcao < 1 || opcao > 7);
+			}while(opcao < 1 || opcao > 8);
 			
 			switch(opcao) {
 			case 1:
