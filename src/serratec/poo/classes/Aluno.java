@@ -10,6 +10,9 @@ public class Aluno {
 	private LocalDate dataNascimento;
 	private int turma;
 	private List<Double> notas = new ArrayList<>();
+	private double mediaAluno;
+	private String situacao;
+
 	public Aluno(String nome, LocalDate dataNascimento, int turma, List<Double> notas) {
 		super();
 		this.nome = nome;
@@ -37,12 +40,26 @@ public class Aluno {
 		this.notas = notas;
 	}
 	
+	
+	
+	public String getSituacao() {
+		if(getMediaAluno() > 6) {
+			this.situacao = "Aprovado";
+			return situacao;
+		}
+		this.situacao = "Reprovado";
+		return situacao;
+	}
+	public double getMediaAluno() {
+		mediaAluno = (notas.get(0) + notas.get(1) + notas.get(2)) / 3;
+		return mediaAluno;
+	}
+	
 	@Override
 	public String toString() {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		
-		return "Aluno [nome=" + nome + ", dataNascimento=" + df.format(dataNascimento) + ", turma=" + turma + ", notas=" + notas
-				+ "]";
+		return "Aluno [nome=" + nome + ", dataNascimento=" + df.format(dataNascimento) + ", turma=" + turma + ", notas=" + notas+ "]";
 	}
 	
 	
