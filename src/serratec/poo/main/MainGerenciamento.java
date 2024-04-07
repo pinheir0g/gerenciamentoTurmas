@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import serratec.poo.biblioteca.Biblioteca;
-import serratec.poo.classes.Aluno;
+import serratec.poo.classes.*;
+import serratec.poo.utils.Biblioteca;
+
 
 public class MainGerenciamento {
-
+	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		List<Double> notas = new ArrayList<>();
@@ -40,7 +41,7 @@ public class MainGerenciamento {
 						e.printStackTrace();
 					}
 				}
-			}while(opcao < 1 || opcao > 8);
+			}while(opcao < 1 || opcao > 8 );
 			
 			switch(opcao) {
 			case 1:
@@ -72,44 +73,10 @@ public class MainGerenciamento {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				boolean nota1Certa = false;
-				boolean nota2Certa = false;
-				boolean nota3Certa = false;
-				double nota1 = 0.0;
-				double nota2 = 0.0;
-				double nota3 = 0.0;
 				
-				while (!nota1Certa) {
-					System.out.println("Informe a nota da prova 1:  ");
-					nota1 = s.nextDouble();
-					if (nota1 > 10 || nota1 < 0) {
-						System.out.println("Nota invalida! ");
-					} else {
-						nota1Certa = true;
-					}
-				}
-				while (!nota2Certa) {
-					System.out.println("Informe a nota da prova 2:  ");
-					nota2 = s.nextDouble();
-					if (nota2 > 10 || nota2 < 0) {
-						System.out.println("Nota invalida! ");
-					} else {
-						nota2Certa = true;
-					}
-				}
-				while (!nota3Certa) {
-					System.out.println("Informe a nota da prova 3:  ");
-					nota3 = s.nextDouble();
-					if (nota3 > 10 || nota3 < 0) {
-						System.out.println("Nota invalida! ");
-					} else {
-						nota3Certa = true;
-					}
-				}
-				notas.add(nota1);
-				notas.add(nota2);
-				notas.add(nota3);
-				
+				notas.add(Menu.lerNotaProva(1));
+				notas.add(Menu.lerNotaProva(2));
+				notas.add(Menu.lerNotaProva(3));
 				
 				Aluno aluno = new Aluno(nome, data, turma, notas);
 				System.out.println(aluno);
