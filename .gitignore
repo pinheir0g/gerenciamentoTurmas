@@ -21,6 +21,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+gerenciamentoTurmas.iml
 
 External tool builders
 .externalToolBuilders/
