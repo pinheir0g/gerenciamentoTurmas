@@ -24,11 +24,13 @@ public class Menu {
 			
 			switch(opcao) {
 			case 1:
+				List<Double> notas = new ArrayList<>();
 				
 				String nome = Menu.leNome();
 				LocalDate data = Menu.leDataNascimento();
 				int turma = Menu.leTurma();
-				List<Double> notas = new ArrayList<>();
+				
+				System.out.println("Informe as 3 notas do Aluno: ");
 				
 				notas.add(Menu.leNotaProva(1));
 				notas.add(Menu.leNotaProva(2));
@@ -94,7 +96,7 @@ public class Menu {
 	}
 	
 	public static String leNome() {
-		Scanner  s = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		String nome;
         while (true) {
             System.out.println("Digite o nome do aluno: ");
@@ -109,7 +111,6 @@ public class Menu {
                 System.out.println("Nome inválido. Use apenas letras e espaços.");
             }
         }
-
         return nome;
     }
 	
@@ -128,7 +129,7 @@ public class Menu {
 			try {
 				data = LocalDate.parse(dataNascimento, df);
 				
-				if (data.getYear() >= 1880 && data.getYear() <= LocalDate.now().getYear()) {
+				if (data.getYear() >= (LocalDate.now().getYear() - 140) && data.getYear() <= LocalDate.now().getYear()) {
                     dataCorreta = true;
                 } else {
                     System.out.println("Ano inválido. O ano deve estar entre " + (LocalDate.now().getYear() - 140) +  " e " + LocalDate.now().getYear());
@@ -141,7 +142,7 @@ public class Menu {
 	}
 	
 	public static int leTurma() {
-		Scanner  s = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		int turma = 0;
 		boolean turmaCerta = false;
 		while (!turmaCerta){
@@ -160,13 +161,11 @@ public class Menu {
 		return turma;
 	}
 	
-	
 	public static double leNotaProva(int prova) {
 		Scanner  s = new Scanner(System.in);
 		boolean notaCerta = false;
 		double nota = 0.0;
 		
-		System.out.println("Informe as 3 notas do Aluno: ");
 		do {
 			notaCerta = false;
 			System.out.println("Informe a nota da prova " + prova + ":");
