@@ -3,23 +3,6 @@ package serratec.poo.utils;
 import java.io.IOException;
 
 public class Biblioteca {
-	public static String exibeMenu() {
-		return """
-		---------------------------------------
-			GERENCIAMENTO DE TURMAS
-		---------------------------------------
-		  1 - Cadastrar Aluno
-		  2 - Cadastrar Turma
-		  3 - Média da Turma
-		  4 - Situação Aluno
-		  5 - Exibir Alunos
-		  6 - Editar Aluno
-		  7 - Mural de Aniversariantes
-		  8 - Encerrar Programa
-		
-		Escolha uma opção: 
-		""";
-	}
 
 	 public static void clearConsole() throws IOException, InterruptedException{
 	        try {
