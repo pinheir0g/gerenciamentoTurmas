@@ -1,29 +1,33 @@
-/.idea
-Java related
+HELP.md
 target/
-*.jar
-*.war
-*.ear
-*.class
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-eclipse specific
-*.pydevproject
-.project
-.metadata
-bin/
-tmp/
-tmp//*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
+### STS ###
+.apt_generated
 .classpath
-.settings/
-.loadpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-External tool builders
-.externalToolBuilders/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
 
-Locally stored "Eclipse launch configurations"
-*.launch
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
