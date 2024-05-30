@@ -21,11 +21,6 @@ public class UserService {
 
     @Transactional
     public UserDTO createUserAndStudent(UserDTO userDTO) {
-      //SAVE USER
-
-
-        //SAVE STUDENT
-
-        return UserDTO;
+        return null;
     }
 }

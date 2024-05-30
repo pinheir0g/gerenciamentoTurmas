@@ -26,7 +26,7 @@ public class GradeRecordService {
     public GradeRecordDTO update(GradeRecordDTO gradeRecordDTO) {
         Integer gradeRecordID = gradeRecordDTO.getGradeRecordID();
         GradeRecord gradeRecord = gradeRecordRepository.findById(gradeRecordID).orElseThrow(
-                () -> new EntidadeNotFoundException("Não foi encontrado nenhum Historico Escolar com id " + gradeRecordID));
+                () -> new EntidadeNotFoundException("No grade record found by id: " + gradeRecordID));
         ;
         gradeRecordRepository.save(gradeRecord);
         GradeRecordDTO gradeRecordDTOSave = GradeRecordMapper.INSTANCE.toDTO(gradeRecord);
@@ -34,7 +34,7 @@ public class GradeRecordService {
     }
     public GradeRecordDTO findById(Integer id) {
         GradeRecord gradeRecord = gradeRecordRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("Não foi encontrado nenhum Historico Escolar  com Id " + id));
+                .orElseThrow(() -> new EntidadeNotFoundException("No grade record found by id: " + id));
         GradeRecordDTO gradeRecordDTO = GradeRecordMapper.INSTANCE.toDTO(gradeRecord);
         return gradeRecordDTO;
     }
@@ -52,7 +52,7 @@ public class GradeRecordService {
 
     public GradeRecordDTO deleteById(Integer id) {
         GradeRecord gradeRecord = gradeRecordRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("Não foi encontrado nenhum Historico Escolar  com Id " + id));
+                .orElseThrow(() -> new EntidadeNotFoundException("No grade record found by id: " + id));
         gradeRecordRepository.deleteById(id);
         GradeRecordDTO gradeRecordDto = GradeRecordMapper.INSTANCE.toDTO(gradeRecord);
         return gradeRecordDto;

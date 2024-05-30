@@ -17,8 +17,8 @@ public class Student extends User {
     @OneToOne
     private GradeRecord gradeRecord;
 
-    public Student(StudentDTO alunoDTO) {
-        this.gradeRecord = alunoDTO.getGradeRecord();
+    public Student(StudentDTO studentDTO) {
+        this.gradeRecord = studentDTO.getGradeRecord();
     }
 
 }
