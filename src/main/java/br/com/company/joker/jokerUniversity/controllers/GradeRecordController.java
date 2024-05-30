@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/historicos-escolares")
+@RequestMapping("/grade-record")
 public class GradeRecordController {
 
     @Autowired

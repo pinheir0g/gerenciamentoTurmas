@@ -19,9 +19,9 @@ public class StudentService {
     StudentRepository studentRepository;
 
     public StudentDTO save(StudentDTO studentDTO) {
-        Student studentSalvo = studentRepository.save(new Student(studentDTO));
-        StudentDTO studentDTOSalvo = StudentMapper.INSTANCE.toDTO(studentSalvo);
-        return studentDTOSalvo;
+        Student studentSave = studentRepository.save(new Student(studentDTO));
+        StudentDTO studentDTOSave = StudentMapper.INSTANCE.toDTO(studentSave);
+        return studentDTOSave;
     }
 
     public StudentDTO update(StudentDTO studentDTO) {
@@ -30,8 +30,8 @@ public class StudentService {
                 () -> new EntidadeNotFoundException("No student find by id :" + studentID));
         ;
         studentRepository.save(student);
-        StudentDTO studentDTOSalvo = StudentMapper.INSTANCE.toDTO(student);
-        return studentDTOSalvo;
+        StudentDTO studentDTOSave = StudentMapper.INSTANCE.toDTO(student);
+        return studentDTOSave;
     }
     public StudentDTO findById(Integer id) {
         Student student = studentRepository.findById(id)
