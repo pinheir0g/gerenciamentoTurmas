@@ -9,5 +9,4 @@ public class JokerUniversityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JokerUniversityApplication.class, args);
 	}
-
 }

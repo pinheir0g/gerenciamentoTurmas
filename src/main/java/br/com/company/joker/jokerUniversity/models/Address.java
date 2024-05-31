@@ -5,13 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
-
 @Table(name = "address")
 public class Address {
 
@@ -33,9 +30,9 @@ public class Address {
     private String complemento;
     @Column(name = "uf")
     private String uf;
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    private User user;
+    //@JsonIgnore
+    //@OneToOne(mappedBy = "endereco")
+    //private User user;
 
     public Address(AddressDTO addressDTO) {
         this.enderecoID = addressDTO.getAdressID();

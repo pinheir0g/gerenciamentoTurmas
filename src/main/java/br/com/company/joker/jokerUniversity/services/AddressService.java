@@ -5,12 +5,9 @@ import br.com.company.joker.jokerUniversity.dtos.AddressDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
 import br.com.company.joker.jokerUniversity.mappers.AddressMapper;
 import br.com.company.joker.jokerUniversity.models.Address;
-import br.com.company.joker.jokerUniversity.models.Student;
-import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.AdressRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -84,21 +81,6 @@ public class AddressService {
             adressListDTO.add(AddressMapper.INSTANCE.toDTO(address));
         }
         return adressListDTO;
-    }
-
-    public AddressDTO deleteById(Integer id) {
-        Address address = adressRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("No adress find by id:  " + id));
-        User user = address.getUser();
-        if (user != null) {
-            throw new DataIntegrityViolationException(
-                    "The address is associated with a user and cannot be deleted.");
-        }
-
-        AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
-
-        adressRepository.delete(address);
-        return newAddressDTO;
     }
 }
 

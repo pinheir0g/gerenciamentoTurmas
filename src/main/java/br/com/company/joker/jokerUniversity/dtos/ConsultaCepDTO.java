@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ConsultaCepDTO {
-
     private String logradouro;
     private String bairro;
     private String localidade;

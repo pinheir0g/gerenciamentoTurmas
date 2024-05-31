@@ -1,13 +1,9 @@
 package br.com.company.joker.jokerUniversity.services;
 
-import br.com.company.joker.jokerUniversity.dtos.StudentDTO;
 import br.com.company.joker.jokerUniversity.dtos.TeacherDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
-import br.com.company.joker.jokerUniversity.mappers.StudentMapper;
 import br.com.company.joker.jokerUniversity.mappers.TeacherMapper;
-import br.com.company.joker.jokerUniversity.models.Student;
 import br.com.company.joker.jokerUniversity.models.Teacher;
-import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.TeacherRepository;
 
 
@@ -39,7 +35,7 @@ public class TeacherService {
         userRepository.save(userSave);
 
         Teacher teacherSave = new Teacher(teacherDTO);
-        teacherSave.setUserID(userSave.getUserID());
+        teacherSave.setUserId(userSave.getUserId());
         teacherRepository.save(teacherSave);
 
         TeacherDTO teacherDTOSave = TeacherMapper.INSTANCE.toDTO(teacherSave);

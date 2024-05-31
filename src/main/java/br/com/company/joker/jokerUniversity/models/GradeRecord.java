@@ -5,12 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Comment;
 
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table(name = "grade_records")
 public class GradeRecord {
 

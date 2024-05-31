@@ -4,12 +4,10 @@ import br.com.company.joker.jokerUniversity.dtos.StudentDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
 @Table(name = "students")
 @PrimaryKeyJoinColumn(name="user_id")
 public class Student extends User {
@@ -22,5 +20,4 @@ public class Student extends User {
         super();
         this.gradeRecord = studentDTO.getGradeRecord();
     }
-
 }

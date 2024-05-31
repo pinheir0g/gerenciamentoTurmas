@@ -42,9 +42,4 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.OK).body(adressService.findAll());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(adressService.deleteById(id));
-
-    }
 }

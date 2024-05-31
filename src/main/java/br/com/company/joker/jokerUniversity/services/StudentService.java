@@ -1,13 +1,12 @@
 package br.com.company.joker.jokerUniversity.services;
 
 import br.com.company.joker.jokerUniversity.dtos.StudentDTO;
-import br.com.company.joker.jokerUniversity.dtos.UserDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
 import br.com.company.joker.jokerUniversity.mappers.StudentMapper;
 import br.com.company.joker.jokerUniversity.models.Student;
-import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.StudentRepository;
 import br.com.company.joker.jokerUniversity.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,8 @@ public class StudentService {
 
     @Autowired
     UserRepository userRepository;
-
-    public StudentDTO createUserAndStudent(StudentDTO studentDTO) {
+    @Transactional
+    public StudentDTO save(StudentDTO studentDTO) {
 
         User userSave = new User(studentDTO.getFullName(), studentDTO.getEmail(), studentDTO.getPassword(),
                 studentDTO.getBirthDate(), studentDTO.getCpf(), studentDTO.getNaturalness(), studentDTO.getNationality(),
@@ -32,14 +31,13 @@ public class StudentService {
 
         userRepository.save(userSave);
 
-        Student studentSave = new Student(studentDTO);
-        studentSave.setUserID(userSave.getUserID());
+        Student studentSave = StudentMapper.INSTANCE.toEntity(studentDTO); //
+        studentSave.setUserId(userSave.getUserId());
         studentRepository.save(studentSave);
 
         StudentDTO studentDTOSave = StudentMapper.INSTANCE.toDTO(studentSave);
         return studentDTOSave;
     }
-
 
     public StudentDTO update(StudentDTO studentDTO) {
         Integer studentID = studentDTO.getUserID();
@@ -71,6 +69,7 @@ public class StudentService {
     public StudentDTO deleteById(Integer id) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No student find by id : " + id));
+
         studentRepository.deleteById(id);
         StudentDTO studentDto = StudentMapper.INSTANCE.toDTO(student);
         return studentDto;
