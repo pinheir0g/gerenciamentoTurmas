@@ -6,6 +6,7 @@ import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException
 import br.com.company.joker.jokerUniversity.mappers.AddressMapper;
 import br.com.company.joker.jokerUniversity.models.Address;
 import br.com.company.joker.jokerUniversity.models.Student;
+import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.AdressRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,8 +89,8 @@ public class AddressService {
     public AddressDTO deleteById(Integer id) {
         Address address = adressRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No adress find by id:  " + id));
-       Student student = address.getStudent();
-        if (student != null) {
+        User user = address.getUser();
+        if (user != null) {
             throw new DataIntegrityViolationException(
                     "The address is associated with a user and cannot be deleted.");
         }

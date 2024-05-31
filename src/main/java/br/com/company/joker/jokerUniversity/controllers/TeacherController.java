@@ -20,7 +20,7 @@ public class TeacherController {
 
     @PostMapping
     public ResponseEntity<TeacherDTO> save(@RequestBody TeacherDTO teacherDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.save(teacherDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(teacherService.createUserAndTeacher(teacherDTO));
     }
 
     @GetMapping

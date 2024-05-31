@@ -12,12 +12,12 @@ import lombok.*;
 @Entity
 @EqualsAndHashCode
 
-@Table(name = "adress")
+@Table(name = "address")
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="adress_id")
+    @Column(name="address_id")
     private Integer enderecoID;
     @Column(name = "cep")
     private String cep;
@@ -35,7 +35,7 @@ public class Address {
     private String uf;
     @JsonIgnore
     @OneToOne(mappedBy = "endereco")
-    private Student student;
+    private User user;
 
     public Address(AddressDTO addressDTO) {
         this.enderecoID = addressDTO.getAdressID();
