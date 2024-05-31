@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @EqualsAndHashCode
-@Table(name = "user")
+@Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id
@@ -34,6 +34,7 @@ public class User {
     @Column(name = "nationality")
     private String nationality;
     @OneToOne
+    @JoinColumn(name = "address_id")
     private Address endereco;
     @Column(name = "phone")
     private String phone;
@@ -51,5 +52,9 @@ public class User {
         this.endereco = userDTO.getEndereco();
         this.phone = userDTO.getPhone();
         this.emergencyContact = userDTO.getEmergencyContact();
+    }
+
+    public User(String fullName, String email, String password, LocalDate birthDate, String cpf, String naturalness,
+                String nationality, Address endereco, String phone, String emergencyContact) {
     }
 }

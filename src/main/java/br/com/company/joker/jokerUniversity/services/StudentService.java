@@ -1,10 +1,13 @@
 package br.com.company.joker.jokerUniversity.services;
 
 import br.com.company.joker.jokerUniversity.dtos.StudentDTO;
+import br.com.company.joker.jokerUniversity.dtos.UserDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
 import br.com.company.joker.jokerUniversity.mappers.StudentMapper;
 import br.com.company.joker.jokerUniversity.models.Student;
+import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.StudentRepository;
+import br.com.company.joker.jokerUniversity.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +21,25 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public StudentDTO save(StudentDTO studentDTO) {
-        Student studentSave = studentRepository.save(new Student(studentDTO));
+    @Autowired
+    UserRepository userRepository;
+
+    public StudentDTO createUserAndStudent(StudentDTO studentDTO) {
+
+        User userSave = new User(studentDTO.getFullName(), studentDTO.getEmail(), studentDTO.getPassword(),
+                studentDTO.getBirthDate(), studentDTO.getCpf(), studentDTO.getNaturalness(), studentDTO.getNationality(),
+                studentDTO.getEndereco(), studentDTO.getPhone(), studentDTO.getEmergencyContact());
+
+        userRepository.save(userSave);
+
+        Student studentSave = new Student(studentDTO);
+        studentSave.setUserID(userSave.getUserID());
+        studentRepository.save(studentSave);
+
         StudentDTO studentDTOSave = StudentMapper.INSTANCE.toDTO(studentSave);
         return studentDTOSave;
     }
+
 
     public StudentDTO update(StudentDTO studentDTO) {
         Integer studentID = studentDTO.getUserID();
