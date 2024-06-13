@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Data
 public class TeacherDTO {
-    private Integer userID;
+    private Integer teacherID;
     private String fullName;
     private String email;
     private String password;

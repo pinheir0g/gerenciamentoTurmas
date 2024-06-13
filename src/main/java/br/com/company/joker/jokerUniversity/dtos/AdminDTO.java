@@ -1,12 +1,14 @@
 package br.com.company.joker.jokerUniversity.dtos;
 
 import br.com.company.joker.jokerUniversity.models.Address;
+import br.com.company.joker.jokerUniversity.models.GradeRecord;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class UserDTO {
+public class AdminDTO {
+    private Integer adminID;
     private String fullName;
     private String email;
     private String password;
@@ -17,4 +19,7 @@ public class UserDTO {
     private Address endereco;
     private String phone;
     private String emergencyContact;
+    private GradeRecord gradeRecord;
+    private String role;
+
 }

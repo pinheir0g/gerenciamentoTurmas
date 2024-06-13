@@ -64,7 +64,6 @@ public class GlobalHandleException extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
-
     @ExceptionHandler(NullPointerException.class)
     ProblemDetail handleNullPointerException(NullPointerException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());

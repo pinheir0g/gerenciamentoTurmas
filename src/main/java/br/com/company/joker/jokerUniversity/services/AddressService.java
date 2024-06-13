@@ -5,8 +5,7 @@ import br.com.company.joker.jokerUniversity.dtos.AddressDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
 import br.com.company.joker.jokerUniversity.mappers.AddressMapper;
 import br.com.company.joker.jokerUniversity.models.Address;
-import br.com.company.joker.jokerUniversity.models.Student;
-import br.com.company.joker.jokerUniversity.models.User;
+import br.com.company.joker.jokerUniversity.models.Admin;
 import br.com.company.joker.jokerUniversity.repositories.AdressRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +34,11 @@ public class AddressService {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be empty");
         }
 
-        ConsultaCepDTO adressDTOconsulted = ConsultaCepService.consultaCep(addressDTO.getCep());
-        addressDTO.setRua(adressDTOconsulted.getLogradouro());
-        addressDTO.setBairro(adressDTOconsulted.getBairro());
-        addressDTO.setCidade(adressDTOconsulted.getLocalidade());
-        addressDTO.setUf(adressDTOconsulted.getUf());
+        ConsultaCepDTO addressDTOconsulted = ConsultaCepService.consultaCep(addressDTO.getCep());
+        addressDTO.setRua(addressDTOconsulted.getLogradouro());
+        addressDTO.setBairro(addressDTOconsulted.getBairro());
+        addressDTO.setCidade(addressDTOconsulted.getLocalidade());
+        addressDTO.setUf(addressDTOconsulted.getUf());
         Address address = adressRepository.save(new Address(addressDTO));
         AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
         return newAddressDTO;
@@ -49,7 +48,6 @@ public class AddressService {
         Integer adressId = addressDTO.getAdressID();
         Address address = adressRepository.findById(adressId).orElseThrow(
                 () -> new EntidadeNotFoundException("No address find by id: " + adressId));
-
         if(addressDTO.getCep() == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be null");
         }else if(addressDTO.getCep().equals("")){
@@ -68,7 +66,7 @@ public class AddressService {
 
     public AddressDTO findById(Integer id) {
         Address address = adressRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("No adress find by id: " + id));
+                .orElseThrow(() -> new EntidadeNotFoundException("No address find by id: " + id));
         AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
         return newAddressDTO;
     }
@@ -77,7 +75,7 @@ public class AddressService {
 
         List<Address> addressList = adressRepository.findAll();
         if (addressList.isEmpty()) {
-            throw new NoSuchElementException("No adress found!");
+            throw new NoSuchElementException("No address found!");
         }
         List<AddressDTO> adressListDTO = new ArrayList<>();
         for (Address address : addressList) {
@@ -85,11 +83,11 @@ public class AddressService {
         }
         return adressListDTO;
     }
-
+/*
     public AddressDTO deleteById(Integer id) {
         Address address = adressRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No adress find by id:  " + id));
-        User user = address.getUser();
+        Admin admin = address.getAdminID();
         if (user != null) {
             throw new DataIntegrityViolationException(
                     "The address is associated with a user and cannot be deleted.");
@@ -100,5 +98,7 @@ public class AddressService {
         adressRepository.delete(address);
         return newAddressDTO;
     }
+ */
+
 }
 

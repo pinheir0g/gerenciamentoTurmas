@@ -1,17 +1,12 @@
 package br.com.company.joker.jokerUniversity.services;
 
-import br.com.company.joker.jokerUniversity.dtos.StudentDTO;
 import br.com.company.joker.jokerUniversity.dtos.TeacherDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
-import br.com.company.joker.jokerUniversity.mappers.StudentMapper;
 import br.com.company.joker.jokerUniversity.mappers.TeacherMapper;
-import br.com.company.joker.jokerUniversity.models.Student;
 import br.com.company.joker.jokerUniversity.models.Teacher;
-import br.com.company.joker.jokerUniversity.models.User;
 import br.com.company.joker.jokerUniversity.repositories.TeacherRepository;
 
 
-import br.com.company.joker.jokerUniversity.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,21 +22,10 @@ public class TeacherService {
     @Autowired
     TeacherRepository teacherRepository;
 
-    @Autowired
-    UserRepository userRepository;
-
-    public TeacherDTO createUserAndTeacher(TeacherDTO teacherDTO) {
-
-        User userSave = new User(teacherDTO.getFullName(), teacherDTO.getEmail(), teacherDTO.getPassword(),
-                teacherDTO.getBirthDate(), teacherDTO.getCpf(), teacherDTO.getNaturalness(), teacherDTO.getNationality(),
-                teacherDTO.getEndereco(), teacherDTO.getPhone(), teacherDTO.getEmergencyContact());
-
-        userRepository.save(userSave);
+    public TeacherDTO save(TeacherDTO teacherDTO) {
 
         Teacher teacherSave = new Teacher(teacherDTO);
-        teacherSave.setUserID(userSave.getUserID());
         teacherRepository.save(teacherSave);
-
         TeacherDTO teacherDTOSave = TeacherMapper.INSTANCE.toDTO(teacherSave);
         return teacherDTOSave;
     }
@@ -65,7 +49,7 @@ public class TeacherService {
     }
 
     public TeacherDTO update(TeacherDTO teacherDTO) {
-        Integer teacherID = teacherDTO.getUserID();
+        Integer teacherID = teacherDTO.getTeacherID();
         Teacher teacher = teacherRepository.findById(teacherID).orElseThrow(
                 () -> new EntidadeNotFoundException("No teacher find by id :" + teacherID));
         ;

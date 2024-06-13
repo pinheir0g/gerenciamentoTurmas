@@ -6,10 +6,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-
 @Data
 public class StudentDTO {
-    private Integer userID;
+    private Integer studentID;
     private String fullName;
     private String email;
     private String password;
@@ -21,5 +20,11 @@ public class StudentDTO {
     private String phone;
     private String emergencyContact;
     private GradeRecord gradeRecord;
-    ;
+
+    public StudentDTO() {
+
+    }
 }
+
+
+
