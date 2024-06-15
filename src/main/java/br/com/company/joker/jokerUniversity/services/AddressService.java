@@ -44,7 +44,7 @@ public class AddressService {
 
     public AddressDTO update(AddressDTO addressDTO) {
         Integer addressId = addressDTO.getAddressID();
-        Address address = addressRepository.findById(adressId).orElseThrow(
+        Address address = addressRepository.findById(addressId).orElseThrow(
                 () -> new EntidadeNotFoundException("No address find by id: " + addressId));
         if(addressDTO.getCep() == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be null");

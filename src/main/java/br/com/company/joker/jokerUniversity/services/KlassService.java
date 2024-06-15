@@ -39,7 +39,7 @@ public class KlassService {
     public KlassDTO findById(Integer id) {
         Klass Klasss = klassRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No Klass find by id :" + id));
-        KlassDTO klassDTO = KlassMapper.INSTANCE.toDTO(Klass);
+        KlassDTO klassDTO = KlassMapper.INSTANCE.toDTO(Klasss);
         return klassDTO;
     }
 

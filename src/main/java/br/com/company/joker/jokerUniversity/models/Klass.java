@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -22,10 +24,10 @@ public class Klass {
 
     @ManyToMany
     @Column(name= "student_id")
-    private Student student;
+    private List<Student> student;
 
     @OneToOne
-    @Column(name= "teacher_id")
+    @JoinColumn(name= "teacher_id")
     private Teacher teacher;
 
     @OneToOne

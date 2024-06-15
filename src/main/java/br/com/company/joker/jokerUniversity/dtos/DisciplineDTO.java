@@ -4,6 +4,7 @@ import br.com.company.joker.jokerUniversity.models.Course;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public class DisciplineDTO implements Serializable {
