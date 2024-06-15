@@ -52,8 +52,7 @@ public class TeacherService {
         Integer teacherID = teacherDTO.getTeacherID();
         Teacher teacher = teacherRepository.findById(teacherID).orElseThrow(
                 () -> new EntidadeNotFoundException("No teacher find by id :" + teacherID));
-        ;
-        teacherRepository.save(teacher);
+        teacherRepository.save(TeacherMapper.INSTANCE.toEntity(teacherDTO));
         TeacherDTO teacherDTOSalvo = TeacherMapper.INSTANCE.toDTO(teacher);
         return teacherDTOSalvo;
     }

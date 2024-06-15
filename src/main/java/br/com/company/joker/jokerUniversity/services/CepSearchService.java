@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ConsultaCepService {
+public class CepSearchService {
 
-    public static ConsultaCepDTO consultaCep(String cep) {
+    public static ConsultaCepDTO cepSearch(String cep) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://viacep.com.br/ws/{cep}/json/";
-        Map<String, String> dadosCep = new HashMap<String, String>();
-        dadosCep.put("cep", cep);
-        ConsultaCepDTO cepConsultadoDTO = restTemplate.getForObject(url, ConsultaCepDTO.class, dadosCep);
+        Map<String, String> cepData = new HashMap<String, String>();
+        cepData.put("cep", cep);
+        ConsultaCepDTO cepConsultadoDTO = restTemplate.getForObject(url, ConsultaCepDTO.class, cepData);
         if (cepConsultadoDTO.getLogradouro() == null) {
             throw new NullPointerException("This CEP is invalid!");
         }

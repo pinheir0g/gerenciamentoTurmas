@@ -25,15 +25,15 @@ public class AdminService {
         return adminDTOSave;
     }
 
-    public AdminDTO update(AdminDTO AdminDTO) {
-        Integer adminID = AdminDTO.getAdminID();
+    public AdminDTO update(AdminDTO adminDTO) {
+        Integer adminID = adminDTO.getAdminID();
         Admin admin = adminRepository.findById(adminID).orElseThrow(
                 () -> new EntidadeNotFoundException("No admin found by id :" + adminID));
-        ;
-        adminRepository.save(admin);
+        adminRepository.save(AdminMapper.INSTANCE.toEntity(adminDTO));
         AdminDTO AdminDTOSave = AdminMapper.INSTANCE.toDTO(admin);
         return AdminDTOSave;
     }
+
     public AdminDTO findById(Integer id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No admin found by id :" + id));

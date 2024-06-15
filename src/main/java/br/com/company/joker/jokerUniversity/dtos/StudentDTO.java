@@ -20,10 +20,6 @@ public class StudentDTO {
     private String phone;
     private String emergencyContact;
     private GradeRecord gradeRecord;
-
-    public StudentDTO() {
-
-    }
 }
 
 

@@ -5,11 +5,9 @@ import br.com.company.joker.jokerUniversity.dtos.AddressDTO;
 import br.com.company.joker.jokerUniversity.exceptions.EntidadeNotFoundException;
 import br.com.company.joker.jokerUniversity.mappers.AddressMapper;
 import br.com.company.joker.jokerUniversity.models.Address;
-import br.com.company.joker.jokerUniversity.models.Admin;
-import br.com.company.joker.jokerUniversity.repositories.AdressRepository;
+import br.com.company.joker.jokerUniversity.repositories.AddressRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -22,7 +20,7 @@ import java.util.NoSuchElementException;
 public class AddressService {
 
     @Autowired
-    AdressRepository adressRepository;
+    AddressRepository addressRepository;
 
     @Autowired
     ModelMapper modelMapper;
@@ -30,42 +28,42 @@ public class AddressService {
     public AddressDTO save(AddressDTO addressDTO) {
         if(addressDTO.getCep() == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be null");
-        }else if(addressDTO.getCep().equals("")){
+        }else if(addressDTO.getCep().isEmpty()){
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be empty");
         }
 
-        ConsultaCepDTO addressDTOconsulted = ConsultaCepService.consultaCep(addressDTO.getCep());
+        ConsultaCepDTO addressDTOconsulted = CepSearchService.cepSearch(addressDTO.getCep());
         addressDTO.setRua(addressDTOconsulted.getLogradouro());
         addressDTO.setBairro(addressDTOconsulted.getBairro());
         addressDTO.setCidade(addressDTOconsulted.getLocalidade());
         addressDTO.setUf(addressDTOconsulted.getUf());
-        Address address = adressRepository.save(new Address(addressDTO));
+        Address address = addressRepository.save(new Address(addressDTO));
         AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
         return newAddressDTO;
     }
 
     public AddressDTO update(AddressDTO addressDTO) {
-        Integer adressId = addressDTO.getAdressID();
-        Address address = adressRepository.findById(adressId).orElseThrow(
-                () -> new EntidadeNotFoundException("No address find by id: " + adressId));
+        Integer addressId = addressDTO.getAddressID();
+        Address address = addressRepository.findById(adressId).orElseThrow(
+                () -> new EntidadeNotFoundException("No address find by id: " + addressId));
         if(addressDTO.getCep() == null) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be null");
-        }else if(addressDTO.getCep().equals("")){
+        }else if(addressDTO.getCep().isEmpty()){
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "The CEP cant be empty");
         }
-        ConsultaCepDTO adressDTOconsulted = ConsultaCepService.consultaCep(addressDTO.getCep());
+        ConsultaCepDTO adressDTOconsulted = CepSearchService.cepSearch(addressDTO.getCep());
         addressDTO.setRua(adressDTOconsulted.getLogradouro());
         addressDTO.setBairro(adressDTOconsulted.getBairro());
         addressDTO.setCidade(adressDTOconsulted.getLocalidade());
         addressDTO.setUf(adressDTOconsulted.getUf());
-        adressRepository.save(AddressMapper.INSTANCE.toEntity(addressDTO));
+        addressRepository.save(AddressMapper.INSTANCE.toEntity(addressDTO));
         AddressDTO newAddressDTO;
         newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
         return newAddressDTO;
     }
 
     public AddressDTO findById(Integer id) {
-        Address address = adressRepository.findById(id)
+        Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No address find by id: " + id));
         AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
         return newAddressDTO;
@@ -73,7 +71,7 @@ public class AddressService {
 
     public List<AddressDTO> findAll() {
 
-        List<Address> addressList = adressRepository.findAll();
+        List<Address> addressList = addressRepository.findAll();
         if (addressList.isEmpty()) {
             throw new NoSuchElementException("No address found!");
         }
@@ -85,8 +83,8 @@ public class AddressService {
     }
 /*
     public AddressDTO deleteById(Integer id) {
-        Address address = adressRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("No adress find by id:  " + id));
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNotFoundException("No address find by id:  " + id));
         Admin admin = address.getAdminID();
         if (user != null) {
             throw new DataIntegrityViolationException(
@@ -95,7 +93,7 @@ public class AddressService {
 
         AddressDTO newAddressDTO = AddressMapper.INSTANCE.toDTO(address);
 
-        adressRepository.delete(address);
+        addressRepository.delete(address);
         return newAddressDTO;
     }
  */

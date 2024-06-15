@@ -1,6 +1,7 @@
 package br.com.company.joker.jokerUniversity.models;
 
 import br.com.company.joker.jokerUniversity.dtos.AdminDTO;
+import br.com.company.joker.jokerUniversity.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,29 +21,40 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")
     private Integer adminID;
+
     @Column(name = "full_name")
     private String fullName;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
     @Column(name = "cpf")
     private String cpf;
+
     @Column(name = "naturalness")
     private String naturalness;
+
     @Column(name = "nationality")
     private String nationality;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address endereco;
+
     @Column(name = "phone")
     private String phone;
+
     @Column(name = "emergency_contact")
     private String emergencyContact;
+
     @Column(name = "role")
-    private String role;
+    private RoleEnum role;
 
 
     public Admin(AdminDTO adminDTO) {

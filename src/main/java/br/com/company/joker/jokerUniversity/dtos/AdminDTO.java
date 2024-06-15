@@ -1,7 +1,7 @@
 package br.com.company.joker.jokerUniversity.dtos;
 
+import br.com.company.joker.jokerUniversity.enums.RoleEnum;
 import br.com.company.joker.jokerUniversity.models.Address;
-import br.com.company.joker.jokerUniversity.models.GradeRecord;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -19,7 +19,6 @@ public class AdminDTO {
     private Address endereco;
     private String phone;
     private String emergencyContact;
-    private GradeRecord gradeRecord;
-    private String role;
+    private RoleEnum role;
 
 }

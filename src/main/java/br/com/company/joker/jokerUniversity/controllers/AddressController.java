@@ -1,7 +1,7 @@
 package br.com.company.joker.jokerUniversity.controllers;
 
 import br.com.company.joker.jokerUniversity.dtos.AddressDTO;
-import br.com.company.joker.jokerUniversity.services.ConsultaCepService;
+import br.com.company.joker.jokerUniversity.services.CepSearchService;
 import br.com.company.joker.jokerUniversity.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ public class AddressController {
 
     @GetMapping("/fake-endereco/{cep}")
     public ResponseEntity<?> findById(@PathVariable String cep) {
-        return ResponseEntity.status(HttpStatus.OK).body(ConsultaCepService.consultaCep(cep));
+        return ResponseEntity.status(HttpStatus.OK).body(CepSearchService.cepSearch(cep));
     }
 
     @GetMapping("/{id}")

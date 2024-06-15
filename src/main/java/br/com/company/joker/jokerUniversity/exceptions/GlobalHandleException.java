@@ -70,7 +70,6 @@ public class GlobalHandleException extends ResponseEntityExceptionHandler {
         problemDetail.setTitle("Request error");
         problemDetail.setType(URI.create("https://api.ecommerce.com/errors/bad-request"));
         return problemDetail;
-
     }
 
     @ExceptionHandler(HttpClientErrorException.class)

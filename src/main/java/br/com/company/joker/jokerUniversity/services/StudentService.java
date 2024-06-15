@@ -27,13 +27,11 @@ public class StudentService {
         return studentDTOSave;
     }
 
-
     public StudentDTO update(StudentDTO studentDTO) {
         Integer studentID = studentDTO.getStudentID();
         Student student = studentRepository.findById(studentID).orElseThrow(
                 () -> new EntidadeNotFoundException("No student find by id :" + studentID));
-        ;
-        studentRepository.save(student);
+        studentRepository.save(StudentMapper.INSTANCE.toEntity(studentDTO));
         StudentDTO studentDTOSave = StudentMapper.INSTANCE.toDTO(student);
         return studentDTOSave;
     }

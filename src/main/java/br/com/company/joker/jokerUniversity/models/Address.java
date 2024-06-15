@@ -16,7 +16,7 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="address_id")
-    private Integer enderecoID;
+    private Integer addressID;
     @Column(name = "cep")
     private String cep;
     @Column(name = "rua")
@@ -33,7 +33,7 @@ public class Address {
     private String uf;
 
     public Address(AddressDTO addressDTO) {
-        this.enderecoID = addressDTO.getAdressID();
+        this.addressID = addressDTO.getAddressID();
         this.cep = addressDTO.getCep();
         this.rua = addressDTO.getRua();
         this.bairro = addressDTO.getBairro();
