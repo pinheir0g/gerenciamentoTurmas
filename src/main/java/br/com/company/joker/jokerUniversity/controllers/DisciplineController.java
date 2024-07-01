@@ -1,8 +1,6 @@
 package br.com.company.joker.jokerUniversity.controllers;
 
-import br.com.company.joker.jokerUniversity.dtos.CourseDTO;
 import br.com.company.joker.jokerUniversity.dtos.DisciplineDTO;
-import br.com.company.joker.jokerUniversity.services.CourseService;
 import br.com.company.joker.jokerUniversity.services.DisciplineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

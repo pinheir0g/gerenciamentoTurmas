@@ -1,8 +1,6 @@
 package br.com.company.joker.jokerUniversity.mappers;
 
-import br.com.company.joker.jokerUniversity.dtos.CourseDTO;
 import br.com.company.joker.jokerUniversity.dtos.DisciplineDTO;
-import br.com.company.joker.jokerUniversity.models.Course;
 import br.com.company.joker.jokerUniversity.models.Discipline;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
