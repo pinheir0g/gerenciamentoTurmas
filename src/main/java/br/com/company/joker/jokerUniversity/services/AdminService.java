@@ -42,7 +42,7 @@ public class AdminService {
     }
 
     public List<AdminDTO> findAll() {
-        List<Admin>  admins = adminRepository.findAll();
+        List<Admin> admins = adminRepository.findAll();
         if (admins.isEmpty())
             throw new NoSuchElementException("No admin found!");
         List<AdminDTO> adminsDto = new ArrayList<>();

@@ -29,17 +29,17 @@ public class KlassService {
     }
 
     public KlassDTO update(KlassDTO klassDTO) {
-        Integer KlassID = klassDTO.getKlassID();
-        Klass Klass = klassRepository.findById(KlassID).orElseThrow(
-                () -> new EntidadeNotFoundException("No Klass find by id :" + KlassID));
+        Integer klassID = klassDTO.getKlassID();
+        Klass klass = klassRepository.findById(klassID).orElseThrow(
+                () -> new EntidadeNotFoundException("No Klass find by id :" + klassID));
         klassRepository.save(KlassMapper.INSTANCE.toEntity(klassDTO));
-        KlassDTO klassDTOSave = KlassMapper.INSTANCE.toDTO(Klass);
+        KlassDTO klassDTOSave = KlassMapper.INSTANCE.toDTO(klass);
         return klassDTOSave;
     }
     public KlassDTO findById(Integer id) {
-        Klass Klasss = klassRepository.findById(id)
+        Klass klass = klassRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No Klass find by id :" + id));
-        KlassDTO klassDTO = KlassMapper.INSTANCE.toDTO(Klasss);
+        KlassDTO klassDTO = KlassMapper.INSTANCE.toDTO(klass);
         return klassDTO;
     }
 
@@ -55,10 +55,10 @@ public class KlassService {
     }
 
     public KlassDTO deleteById(Integer id) {
-        Klass Klass = klassRepository.findById(id)
+        Klass klass = klassRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No Klass find by id : " + id));
         klassRepository.deleteById(id);
-        KlassDTO klassDto = KlassMapper.INSTANCE.toDTO(Klass);
+        KlassDTO klassDto = KlassMapper.INSTANCE.toDTO(klass);
         return klassDto;
     }
 }

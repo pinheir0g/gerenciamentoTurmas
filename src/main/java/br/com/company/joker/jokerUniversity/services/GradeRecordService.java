@@ -40,7 +40,7 @@ public class GradeRecordService {
     }
 
     public List<GradeRecordDTO> findAll() {
-        List<GradeRecord>  gradeRecords = gradeRecordRepository.findAll();
+        List<GradeRecord> gradeRecords = gradeRecordRepository.findAll();
         if (gradeRecords.isEmpty())
             throw new NoSuchElementException("No Grade Record Found!");
         List<GradeRecordDTO> gradeRecordsDto = new ArrayList<>();

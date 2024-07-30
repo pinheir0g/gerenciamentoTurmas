@@ -1,6 +1,8 @@
 package br.com.company.joker.jokerUniversity.controllers;
 
 import br.com.company.joker.jokerUniversity.dtos.DisciplineDTO;
+import br.com.company.joker.jokerUniversity.dtos.DisciplineGetDTO;
+import br.com.company.joker.jokerUniversity.dtos.DisciplineResponseDTO;
 import br.com.company.joker.jokerUniversity.services.DisciplineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,12 +30,12 @@ public class DisciplineController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DisciplineDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<DisciplineResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(disciplineService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<DisciplineDTO>> findAll() {
+    public ResponseEntity<List<DisciplineResponseDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(disciplineService.findAll());
     }
 
