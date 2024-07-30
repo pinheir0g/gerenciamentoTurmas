@@ -41,6 +41,5 @@ public class Course {
         this.courseName = courseDTO.getCourseName();
         this.description = courseDTO.getDescription();
         this.duration = courseDTO.getDuration();
-        this.discipline = courseDTO.getDiscipline();
     }
 }

@@ -1,6 +1,7 @@
 package br.com.company.joker.jokerUniversity.controllers;
 
 import br.com.company.joker.jokerUniversity.dtos.CourseDTO;
+import br.com.company.joker.jokerUniversity.dtos.CourseGetDTO;
 import br.com.company.joker.jokerUniversity.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,12 +30,12 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CourseDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<CourseGetDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(courseService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<CourseDTO>> findAll() {
+    public ResponseEntity<List<CourseGetDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(courseService.findAll());
     }
 

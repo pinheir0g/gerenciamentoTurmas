@@ -1,6 +1,7 @@
 package br.com.company.joker.jokerUniversity.mappers;
 
 import br.com.company.joker.jokerUniversity.dtos.CourseDTO;
+import br.com.company.joker.jokerUniversity.dtos.CourseGetDTO;
 import br.com.company.joker.jokerUniversity.models.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -12,4 +13,6 @@ public interface CourseMapper {
 
     CourseDTO toDTO(Course course);
     Course toEntity(CourseDTO courseDTO);
+
+    CourseGetDTO toGetDTO(Course course);
 }
