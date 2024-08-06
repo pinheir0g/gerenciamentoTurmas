@@ -30,7 +30,7 @@ public class CourseService {
     public CourseDTO update(CourseDTO courseDTO) {
         Integer courseID = courseDTO.getCourseID();
         Course course = courseRepository.findById(courseID).orElseThrow(
-                () -> new EntidadeNotFoundException("No Course found by id :" + courseID));
+                () -> new EntidadeNotFoundException("No Course find by id :" + courseID));
         courseRepository.save(CourseMapper.INSTANCE.toEntity(courseDTO));
         CourseDTO courseDTOSave = CourseMapper.INSTANCE.toDTO(course);
         return courseDTOSave;
@@ -38,25 +38,25 @@ public class CourseService {
 
     public CourseGetDTO findById(Integer id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("No Course found by id :" + id));
-        CourseGetDTO courseGetDTO = CourseMapper.INSTANCE.toGetDTO(course);
-        return courseGetDTO;
+                .orElseThrow(() -> new EntidadeNotFoundException("No Course find by id :" + id));
+        CourseGetDTO courseDTO = CourseMapper.INSTANCE.toGetDTO(course);
+        return courseDTO;
     }
 
     public List<CourseGetDTO> findAll() {
         List<Course> courses = courseRepository.findAll();
         if (courses.isEmpty())
-            throw new NoSuchElementException("No Course found!");
-        List<CourseGetDTO> courseGetDTO = new ArrayList<>();
+            throw new NoSuchElementException("No Course find!");
+        List<CourseGetDTO> courseDto = new ArrayList<>();
         for (Course course : courses) {
-            courseGetDTO.add(CourseMapper.INSTANCE.toGetDTO(course));
+            courseDto.add(CourseMapper.INSTANCE.toGetDTO(course));
         }
-        return courseGetDTO;
+        return courseDto;
     }
 
     public CourseDTO deleteById(Integer id) {
         Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNotFoundException("No Course found by id : " + id));
+                .orElseThrow(() -> new EntidadeNotFoundException("No Course find by id : " + id));
         courseRepository.deleteById(id);
         CourseDTO courseDTO = CourseMapper.INSTANCE.toDTO(course);
         return courseDTO;

@@ -8,7 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,15 +34,13 @@ public class Discipline {
   @Column(name = "period")
   private Integer period;
 
-  @ManyToOne
-  @JoinColumn(name= "course_id")
-  @JsonIgnore
-  private Course course;
+  @ManyToMany(mappedBy = "disciplines")
+  private Set<Course> courses = new HashSet<>();
 
-  public Discipline(DisciplineDTO disciplineDTO) {
+  public Discipline(DisciplineDTO disciplineDTO, Set<Course> courses) {
     this.name = disciplineDTO.getName();
     this.description = disciplineDTO.getDescription();
     this.period = disciplineDTO.getPeriod();
-    this.course = disciplineDTO.getCourse();
+    this.courses = courses;
   }
 }

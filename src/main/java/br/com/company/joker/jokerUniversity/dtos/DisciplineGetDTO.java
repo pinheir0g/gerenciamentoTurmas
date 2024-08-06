@@ -5,10 +5,10 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class DisciplineResponseDTO {
-    Integer id;
+public class DisciplineGetDTO {
+    Integer disciplineID;
     String name;
     String description;
     Integer period;
-    Set<CourseResponseDTO> courseIds;
+    Set<Integer> courseIds;
 }

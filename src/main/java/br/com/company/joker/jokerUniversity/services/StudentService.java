@@ -43,7 +43,7 @@ public class StudentService {
     }
 
     public List<StudentDTO> findAll() {
-        List<Student>  students = studentRepository.findAll();
+        List<Student> students = studentRepository.findAll();
         if (students.isEmpty())
             throw new NoSuchElementException("No student find!");
         List<StudentDTO> studentsDto = new ArrayList<>();
