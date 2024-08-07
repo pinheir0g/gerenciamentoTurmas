@@ -1,6 +1,8 @@
 package br.com.company.joker.jokerUniversity.models;
 
+import br.com.company.joker.jokerUniversity.dtos.CourseResponseDTO;
 import br.com.company.joker.jokerUniversity.dtos.DisciplineDTO;
+import br.com.company.joker.jokerUniversity.dtos.DisciplineResponseDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,13 +36,17 @@ public class Discipline {
   @Column(name = "period")
   private Integer period;
 
-  @ManyToMany(mappedBy = "disciplines")
+  @ManyToMany(mappedBy = "disciplines", fetch = FetchType.EAGER)
   private Set<Course> courses = new HashSet<>();
 
-  public Discipline(DisciplineDTO disciplineDTO, Set<Course> courses) {
+  public Discipline(DisciplineDTO disciplineDTO) {
     this.name = disciplineDTO.getName();
     this.description = disciplineDTO.getDescription();
     this.period = disciplineDTO.getPeriod();
-    this.courses = courses;
+    this.courses = disciplineDTO.getCourses();
   }
+
+//  public void setCourses(Set<CourseResponseDTO> courses) {
+//    this.courses = courses
+//  }
 }

@@ -9,6 +9,7 @@ import br.com.company.joker.jokerUniversity.models.Discipline;
 import br.com.company.joker.jokerUniversity.repositories.CourseRepository;
 import br.com.company.joker.jokerUniversity.repositories.DisciplineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -23,22 +24,26 @@ public class DisciplineService {
     private CourseRepository courseRepository;
 
     public DisciplineDTO save(DisciplineDTO disciplineDTO) {
+        Discipline discipline = new Discipline(disciplineDTO);
 
-        Set<Course> courses = new HashSet<>();
-        for(Course courseId : disciplineDTO.getCourses()){
-           Integer id = courseId.getCourseID();
+        Set<Course> courses = new HashSet<>(); // TODO: passar esse course para courseResponseDTO e resolve problema de cascata de discipline e course
+        for(Course courseDTO : disciplineDTO.getCourses()){
+           Integer id = courseDTO.getCourseID();
 
            Course course = courseRepository.findById(id).
-                   orElseThrow(() -> new RuntimeException("No Courses found with id: " + courseId));
+                   orElseThrow(() -> new RuntimeException("No Courses found with id: " + id));
+
+//           CourseResponseDTO courseConvertedToDto = CourseMapper.INSTANCE.toResponseDTO(course);
            courses.add(course);
+
+           course.getDisciplines().add(discipline); // necessário para associar um ao outro na tabela course_discipline(se não tiver retorna array vazio)
         }
 
-        Discipline disciplineSave = new Discipline(disciplineDTO, courses);
-        disciplineRepository.save(disciplineSave);
+        discipline.setCourses(courses);
 
+        disciplineRepository.save(discipline);
 
-        DisciplineDTO disciplineDTOSave = DisciplineMapper.INSTANCE.toDTO(disciplineSave);
-        return disciplineDTOSave;
+        return DisciplineMapper.INSTANCE.toDTO(discipline);
     }
 
     public DisciplineDTO update(DisciplineDTO disciplineDTO) {
@@ -50,20 +55,28 @@ public class DisciplineService {
         return disciplineDTOSave;
     }
 
-    public DisciplineResponseDTO findById(Integer id) {
+    public DisciplineDTO findById(Integer id) {
         Discipline discipline = disciplineRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No Discipline found by id :" + id));
-        DisciplineResponseDTO disciplineResponseDTO = DisciplineMapper.INSTANCE.toResponseDTO(discipline);
+        DisciplineDTO disciplineResponseDTO = DisciplineMapper.INSTANCE.toDTO(discipline);
         return disciplineResponseDTO;
     }
 
-    public List<DisciplineResponseDTO> findAll() {
+    public List<DisciplineDTO> findAll() {
         List<Discipline> disciplines = disciplineRepository.findAll();
         if (disciplines.isEmpty())
             throw new NoSuchElementException("No Discipline found!");
-        List<DisciplineResponseDTO> disciplineResponseDTO = new ArrayList<>();
+        List<DisciplineDTO> disciplineResponseDTO = new ArrayList<>(); // TODO: MUDAR PARA DISCIPLINERESPONSEDTO QUANDO RESOLVER ERRO AO RETORNAR COURSE
         for (Discipline discipline : disciplines) {
-            disciplineResponseDTO.add(DisciplineMapper.INSTANCE.toResponseDTO(discipline));
+
+            System.out.println(discipline.getCourses());
+//            Set<Course> courses = new HashSet<>();
+//            for(Course course : discipline.getCourses()){
+//                courses.add(course);
+//            }
+//
+//            System.out.println(courses);
+            disciplineResponseDTO.add(DisciplineMapper.INSTANCE.toDTO(discipline));
         }
         return disciplineResponseDTO;
     }

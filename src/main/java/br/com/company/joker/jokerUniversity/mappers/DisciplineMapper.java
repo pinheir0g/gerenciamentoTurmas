@@ -18,30 +18,5 @@ public interface DisciplineMapper {
     DisciplineDTO toDTO(Discipline discipline);
     DisciplineGetDTO toGetDTO(Discipline discipline);
     Discipline toEntity(DisciplineDTO disciplineDTO);
-
-    default CourseResponseDTO toCourseResponseDTO(Course course) {
-        CourseResponseDTO dto = new CourseResponseDTO();
-        dto.setCourseID(course.getCourseID());
-        dto.setCourseName(course.getCourseName());
-        return dto;
-    }
-
-    public default DisciplineResponseDTO toResponseDTO(Discipline discipline){
-        DisciplineResponseDTO disciplineResponseDTO = new DisciplineResponseDTO();
-
-        Set<CourseResponseDTO> courseResponseDTO = new HashSet<>();
-
-        disciplineResponseDTO.setId(discipline.getDisciplineID());
-        disciplineResponseDTO.setDescription(discipline.getDescription());
-        disciplineResponseDTO.setName(discipline.getName());
-        disciplineResponseDTO.setPeriod(discipline.getPeriod());
-
-        Set<CourseResponseDTO> courseResponseDTOs = discipline.getCourses().stream()
-                .map(this::toCourseResponseDTO)
-                .collect(Collectors.toSet());
-
-        disciplineResponseDTO.setCourseIds(courseResponseDTOs);
-
-        return disciplineResponseDTO;
-    }
+    DisciplineResponseDTO toResponseDTO(Discipline discipline);
 }

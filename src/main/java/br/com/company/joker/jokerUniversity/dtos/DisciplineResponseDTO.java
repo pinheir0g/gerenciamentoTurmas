@@ -1,5 +1,6 @@
 package br.com.company.joker.jokerUniversity.dtos;
 
+import br.com.company.joker.jokerUniversity.models.Course;
 import lombok.Data;
 
 import java.util.Set;
@@ -10,5 +11,5 @@ public class DisciplineResponseDTO {
     String name;
     String description;
     Integer period;
-    Set<CourseResponseDTO> courseIds;
+    Set<Course> courses;
 }
