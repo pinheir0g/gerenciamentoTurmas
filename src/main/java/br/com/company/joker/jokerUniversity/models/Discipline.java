@@ -3,6 +3,7 @@ package br.com.company.joker.jokerUniversity.models;
 import br.com.company.joker.jokerUniversity.dtos.CourseResponseDTO;
 import br.com.company.joker.jokerUniversity.dtos.DisciplineDTO;
 import br.com.company.joker.jokerUniversity.dtos.DisciplineResponseDTO;
+import br.com.company.joker.jokerUniversity.mappers.CourseMapper;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,10 +44,5 @@ public class Discipline {
     this.name = disciplineDTO.getName();
     this.description = disciplineDTO.getDescription();
     this.period = disciplineDTO.getPeriod();
-    this.courses = disciplineDTO.getCourses();
   }
-
-//  public void setCourses(Set<CourseResponseDTO> courses) {
-//    this.courses = courses
-//  }
 }

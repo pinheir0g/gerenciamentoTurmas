@@ -27,14 +27,17 @@ public class DisciplineService {
         Discipline discipline = new Discipline(disciplineDTO);
 
         Set<Course> courses = new HashSet<>(); // TODO: passar esse course para courseResponseDTO e resolve problema de cascata de discipline e course
-        for(Course courseDTO : disciplineDTO.getCourses()){
+        Set<CourseResponseDTO> coursesResponseDTO = new HashSet<>();
+        for(CourseResponseDTO courseDTO : disciplineDTO.getCourses()){
            Integer id = courseDTO.getCourseID();
 
            Course course = courseRepository.findById(id).
                    orElseThrow(() -> new RuntimeException("No Courses found with id: " + id));
 
-//           CourseResponseDTO courseConvertedToDto = CourseMapper.INSTANCE.toResponseDTO(course);
+           CourseResponseDTO courseConvertedToDto = CourseMapper.INSTANCE.toResponseDTO(course);
            courses.add(course);
+
+           coursesResponseDTO.add(courseConvertedToDto);
 
            course.getDisciplines().add(discipline); // necessário para associar um ao outro na tabela course_discipline(se não tiver retorna array vazio)
         }
@@ -43,7 +46,10 @@ public class DisciplineService {
 
         disciplineRepository.save(discipline);
 
-        return DisciplineMapper.INSTANCE.toDTO(discipline);
+        DisciplineDTO disciplineDTO1 = DisciplineMapper.INSTANCE.toDTO(discipline);
+        disciplineDTO1.setCourses(coursesResponseDTO);
+
+        return disciplineDTO1;
     }
 
     public DisciplineDTO update(DisciplineDTO disciplineDTO) {

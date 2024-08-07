@@ -14,5 +14,5 @@ public class DisciplineDTO implements Serializable {
     String name;
     String description;
     Integer period;
-    Set<Course> courses;
+    Set<CourseResponseDTO> courses;
 }
