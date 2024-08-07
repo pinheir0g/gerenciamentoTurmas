@@ -46,10 +46,10 @@ public class DisciplineService {
 
         disciplineRepository.save(discipline);
 
-        DisciplineDTO disciplineDTO1 = DisciplineMapper.INSTANCE.toDTO(discipline);
-        disciplineDTO1.setCourses(coursesResponseDTO);
+        DisciplineDTO disciplineInstancedFinal = DisciplineMapper.INSTANCE.toDTO(discipline);
+        disciplineInstancedFinal.setCourses(coursesResponseDTO);
 
-        return disciplineDTO1;
+        return disciplineInstancedFinal;
     }
 
     public DisciplineDTO update(DisciplineDTO disciplineDTO) {
@@ -74,14 +74,6 @@ public class DisciplineService {
             throw new NoSuchElementException("No Discipline found!");
         List<DisciplineDTO> disciplineResponseDTO = new ArrayList<>(); // TODO: MUDAR PARA DISCIPLINERESPONSEDTO QUANDO RESOLVER ERRO AO RETORNAR COURSE
         for (Discipline discipline : disciplines) {
-
-            System.out.println(discipline.getCourses());
-//            Set<Course> courses = new HashSet<>();
-//            for(Course course : discipline.getCourses()){
-//                courses.add(course);
-//            }
-//
-//            System.out.println(courses);
             disciplineResponseDTO.add(DisciplineMapper.INSTANCE.toDTO(discipline));
         }
         return disciplineResponseDTO;

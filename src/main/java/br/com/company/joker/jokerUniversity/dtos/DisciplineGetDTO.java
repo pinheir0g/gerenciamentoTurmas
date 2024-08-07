@@ -10,5 +10,4 @@ public class DisciplineGetDTO {
     String name;
     String description;
     Integer period;
-    Set<Integer> courseIds;
 }

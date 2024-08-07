@@ -30,15 +30,15 @@ public class AdminService {
         Admin admin = adminRepository.findById(adminID).orElseThrow(
                 () -> new EntidadeNotFoundException("No admin found by id :" + adminID));
         adminRepository.save(AdminMapper.INSTANCE.toEntity(adminDTO));
-        AdminDTO AdminDTOSave = AdminMapper.INSTANCE.toDTO(admin);
-        return AdminDTOSave;
+        AdminDTO adminDTOSave = AdminMapper.INSTANCE.toDTO(admin);
+        return adminDTOSave;
     }
 
     public AdminDTO findById(Integer id) {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No admin found by id :" + id));
-        AdminDTO AdminDTO = AdminMapper.INSTANCE.toDTO(admin);
-        return AdminDTO;
+        AdminDTO adminDTO = AdminMapper.INSTANCE.toDTO(admin);
+        return adminDTO;
     }
 
     public List<AdminDTO> findAll() {
@@ -46,7 +46,7 @@ public class AdminService {
         if (admins.isEmpty())
             throw new NoSuchElementException("No admin found!");
         List<AdminDTO> adminsDto = new ArrayList<>();
-        for (Admin  admin : admins) {
+        for (Admin admin : admins) {
             adminsDto.add(AdminMapper.INSTANCE.toDTO(admin));
         }
         return adminsDto;
@@ -56,7 +56,7 @@ public class AdminService {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No admin found by id : " + id));
         adminRepository.deleteById(id);
-        AdminDTO AdminDTO = AdminMapper.INSTANCE.toDTO(admin);
-        return AdminDTO;
+        AdminDTO adminDTO = AdminMapper.INSTANCE.toDTO(admin);
+        return adminDTO;
     }
 }

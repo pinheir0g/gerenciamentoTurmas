@@ -50,12 +50,4 @@ public class Course {
         this.duration = courseDTO.getDuration();
     }
 
-    public Course (CourseDTO courseDTO, Set<Discipline> disciplines) {
-        this.courseID = courseDTO.getCourseID();
-        this.courseName = courseDTO.getCourseName();
-        this.description = courseDTO.getDescription();
-        this.duration = courseDTO.getDuration();
-        this.disciplines = disciplines;
-    }
-
 }
