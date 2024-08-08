@@ -56,25 +56,27 @@ public class DisciplineService {
         Integer disciplineID = disciplineDTO.getDisciplineID();
         Discipline discipline = disciplineRepository.findById(disciplineID).orElseThrow(
                 () -> new EntidadeNotFoundException("No Discipline found by id :" + disciplineID));
-        disciplineRepository.save(DisciplineMapper.INSTANCE.toEntity(disciplineDTO));
-        DisciplineDTO disciplineDTOSave = DisciplineMapper.INSTANCE.toDTO(discipline);
+        Discipline disciplineConverted = DisciplineMapper.INSTANCE.toEntity(disciplineDTO);
+
+        disciplineRepository.save(disciplineConverted);
+        DisciplineDTO disciplineDTOSave = DisciplineMapper.INSTANCE.toDTO(disciplineConverted);
         return disciplineDTOSave;
     }
 
-    public DisciplineDTO findById(Integer id) {
+    public DisciplineResponseDTO findById(Integer id) {
         Discipline discipline = disciplineRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNotFoundException("No Discipline found by id :" + id));
-        DisciplineDTO disciplineResponseDTO = DisciplineMapper.INSTANCE.toDTO(discipline);
+        DisciplineResponseDTO disciplineResponseDTO = DisciplineMapper.INSTANCE.toResponseDTO(discipline);
         return disciplineResponseDTO;
     }
 
-    public List<DisciplineDTO> findAll() {
+    public List<DisciplineResponseDTO> findAll() {
         List<Discipline> disciplines = disciplineRepository.findAll();
         if (disciplines.isEmpty())
             throw new NoSuchElementException("No Discipline found!");
-        List<DisciplineDTO> disciplineResponseDTO = new ArrayList<>(); // TODO: MUDAR PARA DISCIPLINERESPONSEDTO QUANDO RESOLVER ERRO AO RETORNAR COURSE
+        List<DisciplineResponseDTO> disciplineResponseDTO = new ArrayList<>();
         for (Discipline discipline : disciplines) {
-            disciplineResponseDTO.add(DisciplineMapper.INSTANCE.toDTO(discipline));
+            disciplineResponseDTO.add(DisciplineMapper.INSTANCE.toResponseDTO(discipline));
         }
         return disciplineResponseDTO;
     }
