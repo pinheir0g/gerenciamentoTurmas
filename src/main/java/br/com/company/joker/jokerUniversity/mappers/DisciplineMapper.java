@@ -1,14 +1,10 @@
 package br.com.company.joker.jokerUniversity.mappers;
 
 import br.com.company.joker.jokerUniversity.dtos.*;
-import br.com.company.joker.jokerUniversity.models.Course;
 import br.com.company.joker.jokerUniversity.models.Discipline;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Mapper
 public interface DisciplineMapper {
@@ -18,5 +14,7 @@ public interface DisciplineMapper {
     DisciplineDTO toDTO(Discipline discipline);
     DisciplineGetDTO toGetDTO(Discipline discipline);
     Discipline toEntity(DisciplineDTO disciplineDTO);
+
+    @Mapping(source = "courses", target = "courses") // funciona como um indicador para qual atributo da classe principal relacionar no DTO
     DisciplineResponseDTO toResponseDTO(Discipline discipline);
 }

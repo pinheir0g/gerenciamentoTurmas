@@ -30,12 +30,12 @@ public class DisciplineController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DisciplineDTO> findById(@PathVariable Integer id) {
+    public ResponseEntity<DisciplineResponseDTO> findById(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(disciplineService.findById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<DisciplineDTO>> findAll() {
+    public ResponseEntity<List<DisciplineResponseDTO>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(disciplineService.findAll());
     }
 
